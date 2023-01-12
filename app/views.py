@@ -37,8 +37,26 @@ def verify_password(password, rules):
             no_matche.append('minlowercase')
 
     
+    if 'mindigit' in all_rules:
+        flag = 0
+        for c in password:
+            if c.isdigit():
+                flag += 1
+        if flag < all_rules['mindigit']:
+            no_matche.append('mindigit')
 
 
+    if 'minspecialchars' in all_rules:
+        flag = 0 
+        for c in password:
+            if c.isidentifier() == False:
+                flag += 1
+        
+        if flag < all_rules['minspecialchars']:
+            no_matche.append("minspecialchars")
+           
+
+        
     return all_rules, no_matche
 
 
