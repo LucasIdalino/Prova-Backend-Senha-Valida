@@ -47,15 +47,15 @@ def verify_password(password, rules):
 
 
     if 'minspecialchars' in all_rules:
-        flag = 0 
+        chars = []
         for c in password:
-            if c.isidentifier() == False:
-                flag += 1
-        
-        if flag < all_rules['minspecialchars']:
-            no_matche.append("minspecialchars")
+            if c.isalpha() == False:
+                chars.append(c)
+                
+        if len(chars) < all_rules['minspecialchars']:
+            no_matche.append('minspecialchars')
            
-
+    
         
     return all_rules, no_matche
 
