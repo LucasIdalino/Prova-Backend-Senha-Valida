@@ -10,10 +10,17 @@ def verify_password(password, rules):
     no_matche = []
 
 
-    for var in rules:
-        all_rules[var['rule'].lower()] = var['value']
+    try:
+        for var in rules:
+            if var == "norepeted":
+                all_rules[var['rule'].lower()] = 0
+            else:
+                all_rules[var['rule'].lower()] = var['value']
 
+    except KeyError:
+        pass
     
+
     if 'minsize' in all_rules:
         if len(password) < all_rules['minsize']:
             no_matche.append("minsize")
@@ -56,11 +63,26 @@ def verify_password(password, rules):
             no_matche.append('minspecialchars')
            
     
-    if 'norepeated' in all_rules:
-        pass
-            
+    if 'norepeted' in all_rules:
+        for c in password:
+            if password.count(c) >= 2:
+                no_matche.append('norepeated')
+                break
+
+    if len(no_matche) == 0:
+
+        res = {
+            "verify": True,
+            "no_matche": no_matche
+        }
+
+    else:
+        res = {
+            "verify": False,
+            "no_matche": no_matche
+        }
         
-    return all_rules, no_matche
+    return res
 
 
 
@@ -78,11 +100,10 @@ class Validator_Password(APIView):
 
 
         if request:
-            resposta = f'Está é a senha: {password.upper()}. Essas são as regras: {rules[0]["value"]}'
-            print(verify_password(password, rules))
+            resposta = verify_password(password=password, rules=rules)
 
             return Response(resposta, status=status.HTTP_200_OK)
 
         else:
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response(resposta, status=status.HTTP_204_NO_CONTENT)
             
