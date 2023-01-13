@@ -13,7 +13,7 @@ def verify_password(password, rules):
     try:
         for var in rules:
             if var == "norepeted":
-                all_rules[var['rule'].lower()] = 0
+                all_rules[var['rule'].lower()] = None
             else:
                 all_rules[var['rule'].lower()] = var['value']
 
