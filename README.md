@@ -10,7 +10,6 @@ API REST para checar se a senha passa em todos os requisitos para ser validado.
  
 `$ git clone https://github.com/LucasIdalino/Prova-Backend-Senha-Valida.git`
 
-`$ cd Validator_Password/`
   - Crie um ambiente virtual e ative o
   
 `$ python -m venv venv`
