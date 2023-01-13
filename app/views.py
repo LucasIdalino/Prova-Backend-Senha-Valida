@@ -49,13 +49,16 @@ def verify_password(password, rules):
     if 'minspecialchars' in all_rules:
         chars = []
         for c in password:
-            if c.isalpha() == False:
+            if c.isalnum() == False:
                 chars.append(c)
                 
         if len(chars) < all_rules['minspecialchars']:
             no_matche.append('minspecialchars')
            
     
+    if 'norepeated' in all_rules:
+        pass
+            
         
     return all_rules, no_matche
 
