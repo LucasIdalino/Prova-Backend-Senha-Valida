@@ -23,3 +23,5 @@ API REST para checar se a senha passa em todos os requisitos para ser validado.
   - Por último, execute a aplicação
   
 `py manage.py runserver`
+
+  - Após iniciar a aplicação acesse o link: `http://127.0.0.1:8000/app/verify/`
