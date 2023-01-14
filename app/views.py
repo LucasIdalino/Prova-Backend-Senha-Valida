@@ -9,6 +9,9 @@ def verify_password(password, rules):
     all_rules = {}
     no_matche = []
 
+    #Antes das regras começarem a ser executadas,
+    #a função vai primeiramente identificar quantas regras 
+    #foram recebidas na entrada.
 
     try:
         for var in rules:
@@ -21,11 +24,13 @@ def verify_password(password, rules):
         pass
     
 
+    #Aqui será analisado se a senha têm o tamanho mínimo.  
     if 'minsize' in all_rules:
         if len(password) < all_rules['minsize']:
             no_matche.append("minsize")
         
      
+    #Aqui será analisado se a senha têm caracteres maiúsculo. 
     if 'minuppercase' in all_rules:
         flag = 0
         for c in password:
@@ -35,6 +40,7 @@ def verify_password(password, rules):
             no_matche.append('minuppercase')
 
 
+    #...se a senha têm minúsculo.
     if 'minlowercase' in all_rules:
         flag = 0
         for c in password:
@@ -43,7 +49,8 @@ def verify_password(password, rules):
         if flag < all_rules['minlowercase']:
             no_matche.append('minlowercase')
 
-    
+
+    #...se a senha têm digitos.
     if 'mindigit' in all_rules:
         flag = 0
         for c in password:
@@ -53,6 +60,7 @@ def verify_password(password, rules):
             no_matche.append('mindigit')
 
 
+    #...se têm caracteres especiais.
     if 'minspecialchars' in all_rules:
         chars = []
         for c in password:
@@ -62,12 +70,14 @@ def verify_password(password, rules):
         if len(chars) < all_rules['minspecialchars']:
             no_matche.append('minspecialchars')
            
-    
+
+    #...se a senha têm caracteres repetidos.
     if 'norepeted' in all_rules:
         for c in password:
             if password.count(c) >= 2:
                 no_matche.append('norepeated')
                 break
+
 
     if len(no_matche) == 0:
 
