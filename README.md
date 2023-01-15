@@ -63,12 +63,12 @@ API REST para checar se a senha passa em todos os requisitos para ser validado.
  Para a saída da API, caso `no_match` esteja vazio ou não, a API retornará uma resposta em formato JSON:
  
  `{
-   "verify": True´,
+   "verify": True,
    "no_match": []
   }`
  
  `{
-   "verify": False´,
+   "verify": False,
    "no_match": ["minsize"]
   }`
  
